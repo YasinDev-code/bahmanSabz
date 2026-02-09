@@ -6,3 +6,11 @@ export type User = {
     lastName: string;
     image: string;
 }
+
+
+export type UserTable = {
+    id: number;
+    firstName: string;
+    age: number;
+    email: string;
+}
