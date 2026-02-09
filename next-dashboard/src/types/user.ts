@@ -13,4 +13,5 @@ export type UserTable = {
     firstName: string;
     age: number;
     email: string;
+    image: string;
 }

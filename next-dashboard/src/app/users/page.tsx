@@ -1,7 +1,7 @@
 "use client"
 import { UserTable } from '@/types/user';
 import { getAccessToken } from '@/utils/auth';
-import { Table, Center, Container, Heading, Box, VStack, Button } from '@chakra-ui/react';
+import { Table, Center, Container, Heading, Box, VStack, Button, Avatar } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -20,7 +20,7 @@ function UsersPage() {
 
         async function fetchUsers() {
             try {
-                const res = await fetch('https://dummyjson.com/users?limit=5&select=firstName,id,age,email')
+                const res = await fetch('https://dummyjson.com/users?limit=5&select=firstName,id,age,email,image')
                 const data = await res.json()
                 setUsers(data.users || [])
             } catch (error) {
@@ -49,6 +49,7 @@ function UsersPage() {
                         <Table.Root size="sm" variant="line" interactive>
                             <Table.Header bg="gray.50">
                                 <Table.Row>
+                                    <Table.ColumnHeader py={2} px={3} textAlign="center">تصویر</Table.ColumnHeader>
                                     <Table.ColumnHeader py={4} px={6}>نام</Table.ColumnHeader>
                                     <Table.ColumnHeader py={4} px={6}>سن</Table.ColumnHeader>
                                     <Table.ColumnHeader py={4} px={6} textAlign="center">ایمیل</Table.ColumnHeader>
@@ -56,7 +57,13 @@ function UsersPage() {
                             </Table.Header>
                             <Table.Body>
                                 {users.map((user: UserTable) => (
-                                    <Table.Row key={user.id} _hover={{ bg: "green.500", color:"white" }} color="black">
+                                    <Table.Row key={user.id} _hover={{ bg: "green.500", color: "white" }} color="black">
+                                        <Table.Cell py={4} px={6} textAlign="center">
+                                            <Avatar.Root size="xl">
+                                                <Avatar.Fallback name={user?.firstName} />
+                                                <Avatar.Image src={user?.image} />
+                                            </Avatar.Root>
+                                        </Table.Cell>
                                         <Table.Cell py={4} px={6}>{user.firstName}</Table.Cell>
                                         <Table.Cell py={4} px={6}>{user.age}</Table.Cell>
                                         <Table.Cell py={4} px={6} textAlign="center">{user.email}</Table.Cell>
