@@ -1,12 +1,11 @@
 "use client"
 import { ProductTable } from '@/types/product';
 import { getAccessToken } from '@/utils/auth';
-import { Table, Center, Container, Heading, Box, VStack, Button, Badge, Text } from '@chakra-ui/react';
+import { Table, Center, Container, Heading, Box, VStack, Button, Badge, Text, Avatar } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { toFaNumber } from '@/utils/toFaNumber';
-import Image from 'next/image';
 
 function ProductPage() {
     const router = useRouter()
@@ -65,7 +64,10 @@ function ProductPage() {
                                 {products.map((product: ProductTable) => (
                                     <Table.Row key={product.id} _hover={{ bg: "green.500", color:"white" }} color="black">
                                         <Table.Cell py={4} px={6} textAlign="center">
-                                            <Image src={product.thumbnail} alt={product.title} width={50} height={50} />
+                                            <Avatar.Root size="xl">
+                                                <Avatar.Fallback name={product?.title} />
+                                                <Avatar.Image src={product?.thumbnail} />
+                                            </Avatar.Root>
                                         </Table.Cell>
                                         <Table.Cell py={4} px={6} textAlign="center" fontWeight="medium">{product.title}</Table.Cell>
                                         <Table.Cell py={4} px={6} textAlign="center">{product.brand}</Table.Cell>
