@@ -31,3 +31,13 @@ export function setUser(user: User) {
         }))
     }
 }
+
+export function getUser() {
+    if (typeof window !== 'undefined') {
+        const user = localStorage.getItem('user')
+        if (user) {
+            return JSON.parse(user) as User
+        }
+    }
+    return null
+}
