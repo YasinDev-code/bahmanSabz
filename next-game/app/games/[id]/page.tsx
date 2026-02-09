@@ -1,14 +1,16 @@
 'use client'
 
 import { Center, Container, VStack, Box, Heading, Image, Text, HStack, Badge, Button } from '@chakra-ui/react'
-import { useEffect, useState, use } from 'react'
+import { useEffect, useState } from 'react'
+import { useParams } from 'next/navigation'
 import type { GameDetails } from '../../types/game'
 import Link from 'next/link'
 
-export default function GameDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+export default function GameDetailsPage() {
   const [game, setGame] = useState<GameDetails | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const { id } = use(params)
+  const params = useParams()
+  const id = String(params.id)
 
   useEffect(() => {
     async function fetchDetails() {
