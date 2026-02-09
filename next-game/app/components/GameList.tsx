@@ -32,35 +32,35 @@ export default function GameList({ games, isLoading, page = 1, totalPages = 1, o
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {games.map((g) => (
-              <Table.Row key={g.id} _hover={{ bg: 'gray.50' }}>
+            {games.map((game) => (
+              <Table.Row key={game.id} _hover={{ bg: 'gray.50' }}>
                 <Table.Cell py={4} px={6}>
-                  <Link href={`/games/${g.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <Link href={`/games/${game.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                     <HStack gap={4}>
-                      {g.background_image && <Image src={g.background_image} alt={g.name} width="80px" borderRadius="md" />}
+                      {game.background_image && <Image src={game.background_image} alt={game.name} width="80px" borderRadius="md" />}
                       <VStack gap={1} align="flex-start">
-                        <Text fontWeight="medium" color="teal.700">{g.name}</Text>
-                        <Text fontSize="sm" color="gray.500">{g.released || '—'}</Text>
+                        <Text fontWeight="medium" color="teal.700">{game.name}</Text>
+                        <Text fontSize="sm" color="gray.500">{game.released || '—'}</Text>
                       </VStack>
                     </HStack>
                   </Link>
                 </Table.Cell>
                 <Table.Cell py={4} px={6}>
                   <HStack gap={2} wrap="wrap">
-                    {g.genres?.map((genre) => (
+                    {game.genres?.map((genre) => (
                       <Badge key={genre.id} colorPalette="blue" variant="surface">{genre.name}</Badge>
                     ))}
                   </HStack>
                 </Table.Cell>
                 <Table.Cell py={4} px={6}>
                   <HStack gap={2} wrap="wrap">
-                    {g.parent_platforms?.map(({ platform }) => (
+                    {game.parent_platforms?.map(({ platform }) => (
                       <Badge key={platform.id} colorPalette="teal" variant="surface">{platform.name}</Badge>
                     ))}
                   </HStack>
                 </Table.Cell>
                 <Table.Cell py={4} px={6} textAlign="end">
-                  <Text fontWeight="bold" color="purple.600">{g.metacritic ?? '—'}</Text>
+                  <Text fontWeight="bold" color="purple.600">{game.metacritic ?? '—'}</Text>
                 </Table.Cell>
               </Table.Row>
             ))}
