@@ -35,12 +35,12 @@ export default function Home() {
           </Box>
 
           <HStack gap={4} width="full" justify="center">
-            <Link href="/dashboard/users" style={{ flex: 1 }}>
+            <Link href="/users" style={{ flex: 1 }}>
               <Button colorPalette="teal" variant="solid" width="full" size="lg">
                 کاربران
               </Button>
             </Link>
-            <Link href="/dashboard/products" style={{ flex: 1 }}>
+            <Link href="/products" style={{ flex: 1 }}>
               <Button colorPalette="blue" variant="solid" width="full" size="lg">
                 محصولات
               </Button>
