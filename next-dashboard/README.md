@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next Dashboard
 
-## Getting Started
+داشبورد مدیریتی با Next.js (16.1.6) و React (19.2.3) که با Chakra UI v3 استایل‌دهی شده است. صفحات کلیدی شامل صفحه ورود، کاربران و محصولات بوده و احراز هویت سمت کلاینت با localStorage انجام می‌شود.
 
-First, run the development server:
+## اجرای پروژه
+
+- پیش‌نیاز: Node.js 20.x یا جدیدتر
+- نصب و اجرا:
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+سپس در مرورگر به آدرس http://localhost:3000 بروید.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## صفحات و مسیرها
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- /: صفحه اصلی با خوش‌آمدگویی، آواتار کاربر و دکمه‌های ناوبری به کاربران و محصولات. فایل: `src/app/page.tsx`
+- /login: صفحه ورود با کنترل فعال/غیرفعال بودن دکمه بر اساس پر بودن ورودی‌ها. فایل: `src/app/login/page.tsx`
+- /users: دریافت لیست کاربران از DummyJSON و نمایش در جدول Chakra. فایل: `src/app/users/page.tsx`
+- /products: دریافت و نمایش محصولات با جدول Chakra. فایل: `src/app/products/page.tsx`
 
-## Learn More
+## احراز هویت و ذخیره‌سازی
 
-To learn more about Next.js, take a look at the following resources:
+- مدیریت توکن و کاربر در `src/utils/auth.ts` با توابع SSR-safe:
+    - `getAccessToken`, `setAccessToken`
+    - `getUser`, `setUser`
+- برای جلوگیری از خطای Hydration، چک توکن و ریدایرکت در `useEffect` انجام می‌شود.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## نکات فنی Chakra UI v3
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- استفاده از `colorPalette` به‌جای `colorScheme`
+- جایگزینی کامپوننت‌های قدیمی با نسخه‌های جدید (مانند Group/InputElement در ورودی‌ها)
+- Provider در `src/app/layout.tsx` پیکربندی شده است.
 
-## Deploy on Vercel
+## الگوی جدول‌ها
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- جدول‌ها با `Table.Root`, `Table.Header`, `Table.Row`, `Table.Cell` پیاده‌سازی شده‌اند.
+- برای موبایل از `overflowX="auto"` استفاده شده تا اسکرول افقی داخلی فعال باشد.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## توسعه
+
+- ویرایش فایل‌ها از مسیر `src/app/...` انجام می‌شود؛ تغییرات به‌صورت Hot Reload اعمال می‌گردد.
+- توصیه امنیتی: از لاگ‌کردن مستقیم توکن‌ها خودداری کنید و کلیدها را در محیط امن نگه دارید.
