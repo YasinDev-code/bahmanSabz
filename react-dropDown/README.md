@@ -1,16 +1,60 @@
-# React + Vite
+# React Dropdown (Advanced Select)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+این پروژه یک کامپوننت انتخابگر پیشرفته (Advanced Select/Dropdown) است که با استفاده از React (Vite)، Tailwind CSS v4 و Headless UI توسعه داده شده است. هدف اصلی این پروژه ارائه یک کامپوننت با قابلیت استفاده مجدد بالا، دسترسی‌پذیری (Accessibility) کامل و بهینه‌سازی شده برای نمایش لیست‌های حجیم (Big Data) است.
 
-Currently, two official plugins are available:
+## ویژگی‌ها
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **انتخاب چندگانه (Multi-Select)**: امکان انتخاب چندین آیتم به‌صورت همزمان با مدیریت وضعیت آرایه‌ای.
+- **جستجو و فیلتر (Searchable)**: فیلد جستجوی داخلی برای فیلتر کردن گزینه‌ها در تمامی گروه‌ها به‌صورت آنی.
+- **گروه‌بندی گزینه‌ها (Grouped Options)**: پشتیبانی از نمایش دسته‌بندی‌شده‌ی آیتم‌ها (مانند میوه‌ها، سبزیجات و...).
+- **مجازی‌سازی لیست (Virtualization)**: استفاده از `@tanstack/react-virtual` برای رندر بهینه لیست‌های بسیار بزرگ (۱۰۰۰+ آیتم) و جلوگیری از کندی رابط کاربری.
+- **دسترسی‌پذیری کامل (A11y)**: استفاده از `Headless UI Listbox` برای پشتیبانی کامل از پیمایش با کیبورد و استانداردهای ARIA.
+- **استایل‌دهی مدرن**: طراحی تمیز و واکنش‌گرا با استفاده از Tailwind CSS.
+- **عملیات دسته‌جمعی**: دکمه‌های "انتخاب همه" و "پاک کردن همه" با در نظر گرفتن آیتم‌های غیرفعال.
 
-## React Compiler
+## تکنولوژی‌های استفاده شده
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19**: کتابخانه اصلی رابط کاربری (نسخه جدید).
+- **Vite**: ابزار بیلد سریع و محیط توسعه مدرن.
+- **Tailwind CSS v4**: فریم‌ورک CSS برای استایل‌دهی سریع و بهینه (با پیکربندی جدید `@tailwindcss/vite`).
+- **Headless UI**: کامپوننت‌های بدون استایل اما با منطق کامل برای ساخت Dropdown.
+- **TanStack Virtual**: کتابخانه قدرتمند برای مجازی‌سازی لیست‌های طولانی.
 
-## Expanding the ESLint configuration
+## راه‌اندازی و اجرا
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+1. نصب وابستگی‌ها:
+
+   ```bash
+   npm install
+   ```
+
+2. اجرای محیط توسعه:
+
+   ```bash
+   npm run dev
+   ```
+
+   سپس آدرس نمایش داده شده (معمولاً `http://localhost:5173`) را در مرورگر باز کنید.
+
+3. بیلد برای پروداکشن:
+
+   ```bash
+   npm run build
+   ```
+
+## ساختار پروژه
+
+- `src/components/AdvancedSelect.jsx`: کامپوننت اصلی که منطق کلی Dropdown را مدیریت می‌کند.
+- `src/components/VirtualizedOptionList.jsx`: لیست مجازی‌سازی شده برای نمایش بهینه گزینه‌ها.
+- `src/components/SelectButton.jsx`: دکمه تریگر که وضعیت انتخاب شده‌ها را نمایش می‌دهد.
+- `src/components/SearchInput.jsx`: ورودی جستجو برای فیلتر کردن گزینه‌ها.
+- `src/components/ActionBar.jsx`: نوار ابزار شامل دکمه‌های "Select All" و "Clear All".
+- `src/components/OptionItem.jsx`: آیتم تکی لیست با قابلیت نمایش وضعیت انتخاب و Hover.
+- `src/data/examples.js`: داده‌های نمونه برای تست (شامل دیتاست کوچک و بزرگ).
+- `src/App.jsx`: صفحه دمو برای نمایش نحوه استفاده از کامپوننت در حالت‌های مختلف.
+
+## نکات فنی
+
+- **Tailwind v4**: این پروژه از نسخه ۴ تیلویند استفاده می‌کند که کانفیگ آن مستقیماً در `vite.config.js` و فایل CSS اصلی ایمپورت شده است و نیاز به فایل `tailwind.config.js` قدیمی ندارد.
+- **بهینه‌سازی**: لیست گزینه‌ها در `AdvancedSelect` با استفاده از `useMemo` فیلتر و مسطح (Flatten) می‌شود تا محاسبات سنگین در هر رندر تکرار نشود.
+- **کنترل وضعیت**: کامپوننت هم به‌صورت کنترل‌شده (Controlled) و هم کنترل‌نشده (Uncontrolled) قابل استفاده است.
